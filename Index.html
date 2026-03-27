@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña linda 💜</title>
+    <style>
+        /* Definición de la paleta de colores morado pastel */
+        :root {
+            --fondo-principal: #F3E5F5; /* Morado lavanda muy claro */
+            --fondo-tarjeta: #FFFFFF;    /* Blanco puro para contraste */
+            --texto-principal: #4A148C;  /* Morado oscuro para lectura fácil */
+            --texto-secundario: #7E57C2; /* Morado medio para itálicas */
+            --acento-pastel: #CE93D8;    /* Morado pastel medio para bordes y detalles */
+            --acento-brillante: #BA68C8; /* Morado más vivo para el mensaje y hover */
+        }
+
+        body {
+            background-color: var(--fondo-principal);
+            color: var(--texto-principal);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Evita barras de desplazamiento innecesarias */
+        }
+
+        .container {
+            padding: 40px;
+            border: 3px solid var(--acento-pastel); /* Borde pastel más grueso y suave */
+            border-radius: 25px; /* Esquinas muy redondeadas para un look más tierno */
+            background-color: var(--fondo-tarjeta);
+            box-shadow: 0 10px 25px rgba(126, 87, 194, 0.2); /* Sombra suave teñida de morado */
+            max-width: 85%;
+            width: 450px; /* Ancho fijo ideal para escritorio y móvil */
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px); /* Pequeño efecto de levitación al pasar el mouse */
+        }
+
+        h1 {
+            color: var(--texto-principal);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p.subtitulo {
+            font-style: italic;
+            color: var(--texto-secundario);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .heart-button {
+            background: none;
+            border: none;
+            color: var(--acento-brillante);
+            font-size: 70px; /* Corazón más grande */
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.3s ease;
+            outline: none; /* Quita el borde de enfoque por defecto */
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .heart-button:hover {
+            transform: scale(1.15); /* Efecto de latido al hover */
+            color: var(--acento-pastel); /* Cambia ligeramente el tono */
+        }
+
+        .heart-button:active {
+            transform: scale(0.95); /* Efecto de pulsación al hacer clic */
+        }
+
+        #mensaje-container {
+            margin-top: 25px;
+            min-height: 70px; /* Espacio reservado para el mensaje */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #mensaje {
+            font-weight: 600;
+            color: var(--texto-principal); /* Usamos el morado oscuro para que se lea bien */
+            font-size: 1.1rem;
+            line-height: 1.5;
+            opacity: 0; /* Empieza invisible para la animación */
+            transition: opacity 0.5s ease;
+        }
+
+        #mensaje.visible {
+            opacity: 1; /* Se vuelve visible */
+        }
+
+        /* Pequeño detalle decorativo inferior */
+        .decoracion {
+            font-size: 0.8rem;
+            color: var(--acento-pastel);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ricitos de Amor para Nahomi 💜</h1>
+        <p class="subtitulo">Toca el corazón morado para ver una razón por la que eres especial</p>
+        
+        <button class="heart-button" onclick="mostrarMensaje()" aria-label="Mostrar razón de amor">💜</button>
+        
+        <div id="mensaje-container">
+            <div id="mensaje"></div>
+        </div>
+
+        <div class="decoracion">Tuyo siempre, C.K.</div>
+    </div>
+
+    <script>
+        // Tus razones personalizadas (puedes editar estas frases)
+        const razones = [
+            "Porque tus ojitos lindos son mi luz.",
+            "Porque eres la mujer más capaz y valiente.",
+            "Porque sueño con nuestra familia contigo.",
+            "Porque eres mi fresita y mi refugio.",
+            "Porque mi corazón te siente cerca, siempre.",
+            "Porque me haces querer ser mejor hombre.",
+            "Porque adoro tu paciencia conmigo.",
+            "Porque eres perfecta, incluso en tus errores."
+        ];
+
+        let ultimaRazon = -1; // Para evitar que se repita la misma razón enseguida
+
+        function mostrarMensaje() {
+            const mensajeEl = document.getElementById('mensaje');
+            
+            // Ocultamos el mensaje actual para la animación de transición
+            mensajeEl.classList.remove('visible');
+
+            // Esperamos un momento corto antes de cambiar el texto y mostrarlo
+            setTimeout(() => {
+                let index;
+                // Lógica para asegurar que no salga la misma razón dos veces seguidas
+                do {
+                    index = Math.floor(Math.random() * razones.length);
+                } while (index === ultimaRazon);
+                
+                ultimaRazon = index;
+                mensajeEl.innerText = razones[index];
+                
+                // Hacemos el nuevo mensaje visible con animación
+                mensajeEl.classList.add('visible');
+            }, 200); // Tiempo de espera de la animación de ocultado
+        }
+    </script>
+</body>
+</html>
